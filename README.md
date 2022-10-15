@@ -15,26 +15,6 @@ Advantage here is also to get more recent data.
 No warranty for anything.
 Before using this strategy, it is strongly recommended that you read through the official docs page [here](https://discord.com/developers/docs/topics/oauth2), especially about the scopes and understand how the auth works.
 
-## Change Log
-
-### By this Repository
-
-- Removed Discord user connections & guilds fetching on login.
-
-### By https://github.com/QGIsK/passport-discord
-
-- Added a separate error when being rate limited by Discord. (Note: This does not kill the auth process, when being rate limited on scopes. The 'scope' will simply be empty)
-- Rewrite of both original repositories in a more 'modern' fashion.
-
-
-### By https://github.com/tonestrike/passport-discord
-
-- Ability to configure `disable_guild_select`, and `guild_id` parameters when authenticating bots
-- Fixed bug causing callback to be called twice when get guilds request failed
-- Fixed bug causing the response to be sent twice on error
-
-### OG: https://github.com/nicholastay/passport-discord
-
 ## Installation
 
 ```bash
@@ -43,7 +23,7 @@ npm install @soerenmetje/passport-discord --save
 
 ## Usage
 
-#### Configure Strategy
+### Configure Strategy
 The Discord authentication strategy authenticates users via a Discord user account and OAuth 2.0 token(s). A Discord API client ID, secret and redirect URL must be supplied when using this strategy. The strategy also requires a `verify` callback, which receives the access token and an optional refresh token, as well as a `profile` which contains the authenticated Discord user's profile. The `verify` callback must also call `cb` providing a user to complete the authentication.
 
 ```javascript
@@ -73,7 +53,7 @@ passport.use(new Strategy({
 }));
 ```
 
-#### Authentication Requests
+### Authentication Requests
 Use `passport.authenticate()`, and specify the `'discord'` strategy to authenticate requests.
 
 For example, as a route middleware in an Express app:
@@ -87,7 +67,7 @@ app.get('/auth/discord/callback', passport.authenticate('discord', {
 });
 ```
 
-##### Bot Authentication
+### Bot Authentication
 If using the `bot` scope, the `permissions` option can be set to indicate
 specific permissions your bot needs on the server ([permission codes](https://discordapp.com/developers/docs/topics/permissions)):
 
@@ -100,7 +80,7 @@ You can also determine the default guild by passing in a Guild Discord ID and to
 app.get("/auth/discord", passport.authenticate("discord", { disable_guild_select: true, guild_id: 'id' }));
 ```
 
-#### Refresh Token Usage
+### Refresh Token Usage
 In some use cases where the profile may be fetched more than once or you want to keep the user authenticated, refresh tokens may wish to be used. A package such as `passport-oauth2-refresh` can assist in doing this.
 
 Example:
@@ -148,14 +128,36 @@ refresh.requestNewAccessToken('discord', profile.refreshToken, (err, accessToken
 ## Examples
 The examples can be found in the `/examples` directory.
 
-Be sure to `npm i` or `pnpm i`
+- Express setup
+- vite-plugin-ssr (This one is with Vue but can be easily adapted)
 
-There is an example for a simple Express setup, and one with vite-plugin-ssr ( This one is with Vue but can be easily adapted).
+
+## Change Log
+
+### By this Repository
+
+- Removed Discord user connections & guilds fetching on login.
+
+### By https://github.com/QGIsK/passport-discord
+
+- Added a separate error when being rate limited by Discord. (Note: This does not kill the auth process, when being rate limited on scopes. The 'scope' will simply be empty)
+- Rewrite of both original repositories in a more 'modern' fashion.
+
+
+### By https://github.com/tonestrike/passport-discord
+
+- Ability to configure `disable_guild_select`, and `guild_id` parameters when authenticating bots
+- Fixed bug causing callback to be called twice when get guilds request failed
+- Fixed bug causing the response to be sent twice on error
+
+### Original Package: https://github.com/nicholastay/passport-discord
+- No longer maintained
 
 ## Credits
+* [QGIsK](https://github.com/QGIsK) - Author of the rewrite
+* [tonestrike](https://github.com/tonestrike/) - Author of intermediate fork
+* [Nicolas Tay](https://github.com/nicholastay) - Original author of passport-discord package
 * [Jared Hanson](https://github.com/jaredhanson) -Author of Passport
-* [Nicolas Tay](https://github.com/nicholastay) - Original author of this package
-* [tonestrike](https://github.com/tonestrike/) - Original fork
 
 ## License
 Licensed under the [MIT](https://github.com/soerenmetje/passport-discord/blob/main/LICENSE) license.
