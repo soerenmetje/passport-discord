@@ -1,6 +1,6 @@
 # passport-discord
-<span class="badge-npmversion"><a href="https://www.npmjs.com/package/@qgisk/passport-discord" title="View this project on NPM"><img src="https://img.shields.io/npm/v/@qgisk/passport-discord.svg" alt="NPM version"/></a></span>
-<span class="badge-npmdownloads"><a href="https://www.npmjs.org/package/@qgisk/passport-discord" title="View this project on NPM"><img src="https://img.shields.io/npm/dm/@qgisk/passport-discord.svg" alt="NPM downloads" /></a></span>
+<span class="badge-npmversion"><a href="https://www.npmjs.com/package/@soerenmetje/passport-discord" title="View this project on NPM"><img src="https://img.shields.io/npm/v/@soerenmetje/passport-discord.svg" alt="NPM version"/></a></span>
+<span class="badge-npmdownloads"><a href="https://www.npmjs.org/package/@soerenmetje/passport-discord" title="View this project on NPM"><img src="https://img.shields.io/npm/dm/@soerenmetje/passport-discord.svg" alt="NPM downloads" /></a></span>
 
 The original author(s) no longer seemed to maintain the package, This is a rewrite of both the originals in a more 'modern' fashion.
 
@@ -8,7 +8,7 @@ Passport strategy for authentication with [Discord](http://discordapp.com) throu
 
 Before using this strategy, it is strongly recommended that you read through the official docs page [here](https://discord.com/developers/docs/topics/oauth2), especially about the scopes and understand how the auth works.
 
-## Is this much different than the other 2? 
+## Is this much different than the other 2?
 Nope, only thing I've added is a seperate error when being rate limited by Discord. ( Note: This does not kill the auth process, when being rate limited on scopes. The 'scope' will simply be empty. ).
 
 The rest works the same. ( I hope ;p )
@@ -19,14 +19,14 @@ tbh I was just bored.
 ## Installation
 
 ```bash
-npm install @qgisk/passport-discord --save # or pnpm add @qgisk/passport-discord
+npm install @soerenmetje/passport-discord --save # or pnpm add @soerenmetje/passport-discord
 ```
 
 #### Configure Strategy
 The Discord authentication strategy authenticates users via a Discord user account and OAuth 2.0 token(s). A Discord API client ID, secret and redirect URL must be supplied when using this strategy. The strategy also requires a `verify` callback, which receives the access token and an optional refresh token, as well as a `profile` which contains the authenticated Discord user's profile. The `verify` callback must also call `cb` providing a user to complete the authentication.
 
 ```javascript
-const Strategy = require('@qgisk/passport-discord').Strategy;
+const Strategy = require('@soerenmetje/passport-discord').Strategy;
 
 const scopes = ["identify", "email", "connections", "guilds", "guilds.join"];
 const prompt = "consent";
@@ -118,7 +118,7 @@ Then when refreshing the token
 refresh.requestNewAccessToken('discord', profile.refreshToken, (err, accessToken, refreshToken) => {
     if (err)
         throw Error(error);
-    
+
     profile.accessToken = accessToken;  // Store this
 });
 ```
@@ -137,4 +137,4 @@ Theres an example for a simple Express setup, and one with vite-plugin-ssr ( Thi
 * [tonestrike](https://github.com/tonestrike/) - Original fork
 
 ## License
-Licensed under the [MIT](https://github.com/QGIsK/passport-discord/blob/main/LICENSE) license. 
+Licensed under the [MIT](https://github.com/QGIsK/passport-discord/blob/main/LICENSE) license.

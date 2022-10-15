@@ -5,7 +5,7 @@ require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const passport = require("passport");
-const Strategy = require("@qgisk/passport-discord").Strategy;
+const Strategy = require("@soerenmetje/passport-discord").Strategy;
 const { createPageRenderer } = require("vite-plugin-ssr");
 
 const isProduction = process.env.NODE_ENV === "production";
