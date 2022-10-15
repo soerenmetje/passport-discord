@@ -2,25 +2,46 @@
 <span class="badge-npmversion"><a href="https://www.npmjs.com/package/@soerenmetje/passport-discord" title="View this project on NPM"><img src="https://img.shields.io/npm/v/@soerenmetje/passport-discord.svg" alt="NPM version"/></a></span>
 <span class="badge-npmdownloads"><a href="https://www.npmjs.org/package/@soerenmetje/passport-discord" title="View this project on NPM"><img src="https://img.shields.io/npm/dm/@soerenmetje/passport-discord.svg" alt="NPM downloads" /></a></span>
 
-The original author(s) no longer seemed to maintain the package, This is a rewrite of both the originals in a more 'modern' fashion.
-
 Passport strategy for authentication with [Discord](http://discordapp.com) through the OAuth 2.0 API.
 
+Compared to original packages, this removes Discord user connections & guilds fetching on login.
+This aims at reducing sporadically occurring rate limit errors.
+
+If Discord connections or guilds are still needed, they can be directly fetched from Discord.
+Advantage here is also to get more recent data.
+
+### Disclaimer
+
+No warranty for anything.
 Before using this strategy, it is strongly recommended that you read through the official docs page [here](https://discord.com/developers/docs/topics/oauth2), especially about the scopes and understand how the auth works.
 
-## Is this much different than the other 2?
-Nope, only thing I've added is a seperate error when being rate limited by Discord. ( Note: This does not kill the auth process, when being rate limited on scopes. The 'scope' will simply be empty. ).
+## Change Log
 
-The rest works the same. ( I hope ;p )
+### By this Repository
 
-## Why?
-tbh I was just bored.
+- Removed Discord user connections & guilds fetching on login.
+
+### By https://github.com/QGIsK/passport-discord
+
+- Added a separate error when being rate limited by Discord. (Note: This does not kill the auth process, when being rate limited on scopes. The 'scope' will simply be empty)
+- Rewrite of both original repositories in a more 'modern' fashion.
+
+
+### By https://github.com/tonestrike/passport-discord
+
+- Ability to configure `disable_guild_select`, and `guild_id` parameters when authenticating bots
+- Fixed bug causing callback to be called twice when get guilds request failed
+- Fixed bug causing the response to be sent twice on error
+
+### OG: https://github.com/nicholastay/passport-discord
 
 ## Installation
 
 ```bash
-npm install @soerenmetje/passport-discord --save # or pnpm add @soerenmetje/passport-discord
+npm install @soerenmetje/passport-discord --save
 ```
+
+## Usage
 
 #### Configure Strategy
 The Discord authentication strategy authenticates users via a Discord user account and OAuth 2.0 token(s). A Discord API client ID, secret and redirect URL must be supplied when using this strategy. The strategy also requires a `verify` callback, which receives the access token and an optional refresh token, as well as a `profile` which contains the authenticated Discord user's profile. The `verify` callback must also call `cb` providing a user to complete the authentication.
@@ -129,7 +150,7 @@ The examples can be found in the `/examples` directory.
 
 Be sure to `npm i` or `pnpm i`
 
-Theres an example for a simple Express setup, and one with vite-plugin-ssr ( This one is with Vue but can be easily adapted).
+There is an example for a simple Express setup, and one with vite-plugin-ssr ( This one is with Vue but can be easily adapted).
 
 ## Credits
 * [Jared Hanson](https://github.com/jaredhanson) -Author of Passport
@@ -137,4 +158,4 @@ Theres an example for a simple Express setup, and one with vite-plugin-ssr ( Thi
 * [tonestrike](https://github.com/tonestrike/) - Original fork
 
 ## License
-Licensed under the [MIT](https://github.com/QGIsK/passport-discord/blob/main/LICENSE) license.
+Licensed under the [MIT](https://github.com/soerenmetje/passport-discord/blob/main/LICENSE) license.
