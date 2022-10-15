@@ -9,6 +9,6 @@
     { "type": "test", "hidden": true },
     { "type": "chore", "section": "Other" }
   ],
-  "commitUrlFormat": "https://github.com/QGIsK/steamResolver/commits/{{hash}}",
-  "compareUrlFormat": "https://github.com/QGIsK/steamResolver/compare/{{previousTag}}...{{currentTag}}"
+  "commitUrlFormat": "https://github.com/soerenmetje/steamResolver/commits/{{hash}}",
+  "compareUrlFormat": "https://github.com/soerenmetje/steamResolver/compare/{{previousTag}}...{{currentTag}}"
 }
