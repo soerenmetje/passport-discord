@@ -1,6 +1,6 @@
 {
   "name": "@soerenmetje/passport-discord",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "passport-discord - but rate limit friendly",
   "main": "lib/index.js",
   "files": [
