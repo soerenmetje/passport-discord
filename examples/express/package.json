@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Express discord authentication example",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "dev": "npx nodemon index.js"

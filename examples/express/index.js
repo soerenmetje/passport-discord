@@ -1,12 +1,14 @@
-require("dotenv").config();
+import { config } from "dotenv";
+import express from "express";
+import session from "express-session";
+import passport from "passport";
+import { Strategy } from "@soerenmetje/passport-discord";
+// const Strategy = require('@soerenmetje/passport-discord').Strategy
 
-const express = require("express");
-const session = require("express-session");
-const passport = require("passport");
-const Strategy = require("@soerenmetje/passport-discord").Strategy;
-const app = express();
-
+config();
 const { CLIENT_ID, CLIENT_SECRET, CALLBACK, PORT } = process.env;
+
+const app = express();
 
 passport.serializeUser(function (user, done) {
   done(null, user);
