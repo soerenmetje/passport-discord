@@ -2,18 +2,13 @@
 <span class="badge-npmversion"><a href="https://www.npmjs.com/package/@soerenmetje/passport-discord" title="View this project on NPM"><img src="https://img.shields.io/npm/v/@soerenmetje/passport-discord.svg" alt="NPM version"/></a></span>
 <span class="badge-npmdownloads"><a href="https://www.npmjs.org/package/@soerenmetje/passport-discord" title="View this project on NPM"><img src="https://img.shields.io/npm/dm/@soerenmetje/passport-discord.svg" alt="NPM downloads" /></a></span>
 
-Passport strategy for authentication with [Discord](http://discordapp.com) through the OAuth 2.0 API.
+[Passport](https://www.npmjs.com/package/passport) strategy for authentication with [Discord](http://discordapp.com) through the OAuth 2.0 API.
 
-Compared to original packages, this removes Discord user connections & guilds fetching on login.
-This aims at reducing sporadically occurring rate limit errors.
+This package is forked from [@qgisk/passport-discord](https://github.com/QGIsK/passport-discord). Compared to all original packages, this removes Discord user connections & guilds fetching on login.
+The goal is to reduce sporadically occurring rate limit errors.
 
 If Discord connections or guilds are still needed, they can be directly fetched from Discord.
 Advantage here is also to get more recent data.
-
-### Disclaimer
-
-No warranty for anything.
-Before using this strategy, it is strongly recommended that you read through the official docs page [here](https://discord.com/developers/docs/topics/oauth2), especially about the scopes and understand how the auth works.
 
 ## Installation
 
@@ -22,6 +17,8 @@ npm install @soerenmetje/passport-discord --save
 ```
 
 ## Usage
+
+The usage is similar to all original packages. Therefore, it can serve as a drop-in replacement.
 
 ### Configure Strategy
 The Discord authentication strategy authenticates users via a Discord user account and OAuth 2.0 token(s). A Discord API client ID, secret and redirect URL must be supplied when using this strategy. The strategy also requires a `verify` callback, which receives the access token and an optional refresh token, as well as a `profile` which contains the authenticated Discord user's profile. The `verify` callback must also call `cb` providing a user to complete the authentication.
@@ -50,9 +47,15 @@ passport.use(new Strategy({
     prompt: prompt,
 },
 (accessToken, refreshToken, profile, cb) => {
-    User.findOrCreate({ discordId: profile.id }, (err, user) => {
-        return cb(err, user);
-    });
+    try {
+        // Find or create user in DB
+        User.findOrCreate({ discordId: profile.id }, (err, user) => {
+            return cb(err, user);
+        });
+    } catch (err) {
+        console.error("Fail: Error while handling Discord strategy.", err);
+        cb(err, null);
+    }
 }));
 ```
 
@@ -64,10 +67,9 @@ For example, as a route middleware in an Express app:
 ```javascript
 app.get('/auth/discord', passport.authenticate('discord'));
 app.get('/auth/discord/callback', passport.authenticate('discord', {
-    failureRedirect: '/' // Failure
-}), (req, res) => {
-    res.redirect('/profile') // Success
-});
+  failureRedirect: '/',
+  successRedirect: '/profile'
+}));
 ```
 
 ### Bot Authentication
@@ -83,7 +85,7 @@ You can also determine the default guild by passing in a Guild Discord ID and to
 app.get("/auth/discord", passport.authenticate("discord", { disable_guild_select: true, guild_id: 'id' }));
 ```
 
-### Refresh Token Usage
+### Extra: Refresh Token Usage
 In some use cases where the profile may be fetched more than once or you want to keep the user authenticated, refresh tokens may wish to be used. A package such as `passport-oauth2-refresh` can assist in doing this.
 
 Example:
@@ -134,7 +136,7 @@ refresh.requestNewAccessToken('discord', profile.refreshToken, (err, accessToken
 ## Examples
 The examples can be found in the `/examples` directory.
 
-- Express setup
+- Express
 - vite-plugin-ssr (This one is with Vue but can be easily adapted)
 
 
@@ -158,6 +160,11 @@ The examples can be found in the `/examples` directory.
 
 ### Original Package: https://github.com/nicholastay/passport-discord
 - No longer maintained
+
+## Disclaimer
+
+No warranty for anything.
+Before using this strategy, it is strongly recommended that you read through the official docs page [here](https://discord.com/developers/docs/topics/oauth2), especially about the scopes and understand how the auth works.
 
 ## Credits
 * [QGIsK](https://github.com/QGIsK) - Author of the rewrite
