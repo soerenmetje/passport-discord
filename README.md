@@ -47,15 +47,10 @@ passport.use(new Strategy({
     prompt: prompt,
 },
 (accessToken, refreshToken, profile, cb) => {
-    try {
-        // Find or create user in DB
-        User.findOrCreate({ discordId: profile.id }, (err, user) => {
-            return cb(err, user);
-        });
-    } catch (err) {
-        console.error("Fail: Error while handling Discord strategy.", err);
-        cb(err, null);
-    }
+    // Find or create user in DB
+    User.findOrCreate({ discordId: profile.id }, (err, user) => {
+        return cb(err, user);
+    });
 }));
 ```
 
@@ -88,10 +83,9 @@ app.get("/auth/discord", passport.authenticate("discord", { disable_guild_select
 ### Extra: Refresh Token Usage
 In some use cases where the profile may be fetched more than once or you want to keep the user authenticated, refresh tokens may wish to be used. A package such as `passport-oauth2-refresh` can assist in doing this.
 
-Example:
 
 ```bash
-npm install passport-oauth2-refresh --save # or pnpm add passport-oauth2-refresh
+npm install passport-oauth2-refresh --save
 ```
 
 ```javascript
@@ -109,10 +103,8 @@ const discordStrategy = new Strategy({
   },
   (accessToken, refreshToken, profile, cb) => {
     profile.refreshToken = refreshToken; // store this for later use
+    // Find or create user in DB
     User.findOrCreate({ discordId: profile.id }, (err, user) => {
-        if (err)
-            return done(err);
-
         return cb(err, user);
     });
 });
@@ -121,12 +113,13 @@ passport.use(discordStrategy);
 refresh.use(discordStrategy);
 ```
 
-Then when refreshing the token
+Then you need some event / point in time in your application when it is suitable to refresh the access token.
+Refreshing can look as follows:
 
 ```javascript
 refresh.requestNewAccessToken('discord', profile.refreshToken, (err, accessToken, refreshToken) => {
     if (err)
-        throw Error(error);
+        throw Error(err);
 
     profile.accessToken = accessToken;  // Store this
 });
