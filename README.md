@@ -27,7 +27,10 @@ npm install @soerenmetje/passport-discord --save
 The Discord authentication strategy authenticates users via a Discord user account and OAuth 2.0 token(s). A Discord API client ID, secret and redirect URL must be supplied when using this strategy. The strategy also requires a `verify` callback, which receives the access token and an optional refresh token, as well as a `profile` which contains the authenticated Discord user's profile. The `verify` callback must also call `cb` providing a user to complete the authentication.
 
 ```javascript
-const Strategy = require('@soerenmetje/passport-discord').Strategy;
+import { Strategy } from "@soerenmetje/passport-discord";
+//const Strategy = require('@soerenmetje/passport-discord').Strategy;
+import passport from "passport";
+//const passport = require('passport')
 
 const scopes = ["identify", "email", "connections", "guilds", "guilds.join"];
 const prompt = "consent";
@@ -90,11 +93,14 @@ npm install passport-oauth2-refresh --save # or pnpm add passport-oauth2-refresh
 ```
 
 ```javascript
-const passport = require('passport')
-const DiscordStrategy = require('passport-discord').Strategy
-const Refresh = require('passport-oauth2-refresh');
+import passport from "passport";
+//const passport = require('passport')
+import { Strategy } from "@soerenmetje/passport-discord";
+//const Strategy = require('@soerenmetje/passport-discord').Strategy
+import refresh from "passport-oauth2-refresh";
+//const refresh = require('passport-oauth2-refresh');
 
-const discordStrategy = new DiscordStrategy({
+const discordStrategy = new Strategy({
     clientID: 'id',
     clientSecret: 'secret',
     callbackURL: 'callbackURL'
