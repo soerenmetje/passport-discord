@@ -7,7 +7,7 @@ specifiers:
   eslint-plugin-prettier: ^3.4.1
   eslint-plugin-security: ^1.4.0
   husky: ^7.0.4
-  passport: ^0.5.2
+  passport: ^0.6.0
   passport-oauth2: ^1.6.1
   prettier: ^2.5.1
   standard-version: ^9.3.2
@@ -22,7 +22,7 @@ devDependencies:
   eslint-plugin-prettier: 3.4.1_nzvclje2srg3b6ryiggdxjf4qy
   eslint-plugin-security: 1.4.0
   husky: 7.0.4
-  passport: 0.5.2
+  passport: 0.6.0
   prettier: 2.5.1
   standard-version: 9.3.2
 
@@ -1377,15 +1377,16 @@ packages:
     dev: false
 
   /passport-strategy/1.0.0:
-    resolution: {integrity: sha1-tVOaqPwiWj0a0XlHbd8ja0QPUuQ=}
+    resolution: {integrity: sha512-CB97UUvDKJde2V0KDWWB3lyf6PC3FaZP7YxZ2G8OAtn9p4HI9j9JLP9qjOGZFvyl8uwNT8qM+hGnz/n16NI7oA==}
     engines: {node: '>= 0.4.0'}
 
-  /passport/0.5.2:
-    resolution: {integrity: sha512-w9n/Ot5I7orGD4y+7V3EFJCQEznE5RxHamUxcqLT2QoJY0f2JdN8GyHonYFvN0Vz+L6lUJfVhrk2aZz2LbuREw==}
+  /passport/0.6.0:
+    resolution: {integrity: sha512-0fe+p3ZnrWRW74fe8+SvCyf4a3Pb2/h7gFkQ8yTJpAO50gDzlfjZUZTO1k5Eg9kUct22OxHLqDZoKUWRHOh9ug==}
     engines: {node: '>= 0.4.0'}
     dependencies:
       passport-strategy: 1.0.0
       pause: 0.0.1
+      utils-merge: 1.0.1
     dev: true
 
   /path-exists/3.0.0:
@@ -1420,7 +1421,7 @@ packages:
     dev: true
 
   /pause/0.0.1:
-    resolution: {integrity: sha1-HUCLP9t2kjuVQ9lvtMnf1TXZy10=}
+    resolution: {integrity: sha512-KG8UEiEVkR3wGEb4m5yZkVCzigAD+cVEJck2CzYZO37ZGJfctvVptVO192MwrtPhzONn6go8ylnOdMhKqi4nfg==}
     dev: true
 
   /pify/2.3.0:
@@ -1863,9 +1864,8 @@ packages:
     dev: true
 
   /utils-merge/1.0.1:
-    resolution: {integrity: sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=}
+    resolution: {integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==}
     engines: {node: '>= 0.4.0'}
-    dev: false
 
   /v8-compile-cache/2.3.0:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}
